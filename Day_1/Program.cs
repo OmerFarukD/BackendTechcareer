@@ -254,3 +254,5 @@ for (int a = 0; a <= 10; a++)
     }
     Console.WriteLine(a);
 }
+
+Console.WriteLine("Bir değişiklik yaptım.");
