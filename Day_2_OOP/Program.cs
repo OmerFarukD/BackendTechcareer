@@ -55,8 +55,6 @@ book.Adi = "Abasıynaık";
 book.Yazar = "Sait Faik";
 book.SayfaSayısı = 125;
 Console.WriteLine(book);
-
-
 //**************Struct**************
 // Structlar değer tipindedir
 // Bellekte stack hafızada tutulur
