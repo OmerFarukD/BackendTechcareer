@@ -117,17 +117,76 @@ var categories = Repository.Categories;
 // TODO: Tüm ürünlerin fiyatını azalan bir şekilde sıralayınız.
 //products.OrderByDescending(x => x.Price).ToList().ForEach(p => Console.WriteLine(p));
 
-var details = from p in products
-              join c in categories on p.CategoryId equals c.Id
-              select new ProductDetailDto
-              {
-                  CategoryName = c.Name,
-                  Price = p.Price,
-                  ProductId = p.Id,
-                  ProductName = p.Name,
-                  Stock = p.Stock
-              };
-foreach (var item in details)
-{
-    Console.WriteLine(item);
-}
+//var details = from p in products
+//              join c in categories on p.CategoryId equals c.Id
+//              select new ProductDetailDto
+//              {
+//                  CategoryName = c.Name,
+//                  Price = p.Price,
+//                  ProductId = p.Id,
+//                  ProductName = p.Name,
+//                  Stock = p.Stock
+//              };
+//foreach (var item in details)
+//{
+//    Console.WriteLine(item);
+//}
+
+// 2. Yöntem 
+//var lambdaJoin = products.Join(categories,
+//    p => p.CategoryId,
+//    c => c.Id,
+//    (product, category) => new ProductDetailDto
+//    {
+//        CategoryName = category.Name,
+//        Price = product.Price,
+//        ProductId = product.Id,
+//        ProductName = product.Name,
+//        Stock = product.Stock,
+//    }).ToList();
+//lambdaJoin.FindAll(x=>x.CategoryName=="Telefon").ForEach(p => Console.WriteLine(p));
+// TODO: Öyle bir sistem idzayn edin ki ProductDetail listesini dönsün ama Category Id si 2 Olan ürünlerin detay listesi olsun
+
+//var filterLambdaJoin = products
+//    .Where(x => x.CategoryId == 2)
+//    .Join(categories,
+//    p => p.CategoryId,
+//    c => c.Id,
+//    (p, c) => new ProductDetailDto
+//    {
+//        CategoryName = c.Name,
+//        Price = p.Price,
+//        ProductId = p.Id,
+//        ProductName = p.Name,
+//        Stock = p.Stock,
+//    }).ToList();
+//filterLambdaJoin.ForEach(x => Console.WriteLine(x));
+
+List<int> numbers1 = new List<int>() { 1,2,3,4,5};
+List<int> numbers2 = new() { 4,5,6,7,8};
+List<int> numbers3 = new() { 1, 1, 2, 2, 3, 3, 10, 4, 5 };
+
+// TODO : 2 sayı listesinde ortak sayıları tek liste halinde listeleyelim
+//numbers1.Intersect(numbers2).ToList().ForEach(X=>Console.WriteLine(X));
+
+// TODO : 1. Sayı Listesinde bulunan ama 2. sayı listesinde bulunmayan sayıların listesini ekrana yazdıran kod
+//numbers1.Except(numbers2).ToList().ForEach(x => Console.WriteLine(x));
+
+// TODO : 1. Sayı Listesinde bulunan ama 2. sayı listesinde bulunmayan sayıların ustune ekleyip yazdır
+//numbers1.Except(numbers2).ToList().ForEach(x => numbers2.Add(x));
+//numbers2.ForEach(x=> Console.WriteLine(x));
+
+// TODO: 1. Sayı Listesinde bulunan sayıların çarpımını
+//Console.WriteLine(numbers1.Aggregate((a, b) => a * b)); 
+
+// Todo : 3. Sayı listesinde Bulunan benzersiz sayılar.
+//numbers3.Distinct().ToList().ForEach(x=> Console.WriteLine(x));
+
+// Todo : 3 Sayı Listesini tek liste haline getirme
+//numbers1.Concat(numbers2).Concat(numbers3).ToList().ForEach(x=> Console.Write($"{x}, "));
+
+// Todo: Sayı 2 listesinde en büyük ve en küçük değeri ekrana yazınız.
+//Console.WriteLine($"numbers2 listesinde en küçük sayı : {numbers2.Min()}, en büyük sayı ise : {numbers2.Max()}");
+
+// TODO: Sayı 2 Listesinde 2 den büyük 3 tane sayı alan yeni listeyi yazdırınız.
+//numbers2.Where(x=>x>2).Take(3).ToList().ForEach(x=> Console.WriteLine(x));

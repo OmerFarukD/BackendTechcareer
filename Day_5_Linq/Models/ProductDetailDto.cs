@@ -18,4 +18,4 @@ public class ProductDetailDto
     {
         return $"ProductId :{ProductId},ProductName: {ProductName}, Stock:{Stock}, Price : {Price}, CategoryName :{CategoryName} ";
     }
-}
+}// 13.00 da görüşmek üzere
