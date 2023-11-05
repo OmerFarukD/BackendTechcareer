@@ -8,7 +8,6 @@ public class BookRepository :IBookRepository
 
     public BookRepository()
     {
-
         // Seed Data
         _bookData = new List<Book>()
         {
@@ -23,6 +22,7 @@ public class BookRepository :IBookRepository
               new Book{Id=9,CategoryId="C", Description="Çok değerli bir kitap",Price=145, Stock=100, Title="Psikoloji1"},
         };
     }
+
 
     public void Add(Book book)
     {
@@ -54,6 +54,4 @@ public class BookRepository :IBookRepository
         } 
         return book;
     }
-
-
 }
