@@ -39,41 +39,75 @@ public class PlayerService : IPlayerService
 
     public ReturnModel<PlayerResponseDto> Delete(int id)
     {
-        throw new NotImplementedException();
-    }
-
-    public ReturnModel<PlayerResponseDto> GetById(int id)
-    {
         try
         {
             var player = _playerRepository.GetById(id);
-            PlayerResponseDto response = _mapper.Map<PlayerResponseDto>(player);
+
+            _playerRepository.Delete(id);
+
+            var response = _mapper.Map<PlayerResponseDto>(player);
+
             return new ReturnModel<PlayerResponseDto>()
             {
                 Data = response,
-                Message = "Id ye ait oyuncu getirildi.",
+                Message = $"id si : {id} olan oyuncu silindi",
                 StatusCode = System.Net.HttpStatusCode.OK
             };
-        }
-        catch (NotFoundException ex)
-        {
-            return new ReturnModel<PlayerResponseDto>()
+
+        } catch (NotFoundException ex) {
             {
-                Message = ex.Message,
-                StatusCode = System.Net.HttpStatusCode.NotFound
-            };
+                return new ReturnModel<PlayerResponseDto>()
+                {
+                    Message = ex.Message,
+                    StatusCode = System.Net.HttpStatusCode.NotFound
+                };
+
+            }
+        } 
+    }
+
+        public ReturnModel<PlayerResponseDto> GetById(int id)
+        {
+            try
+            {
+                var player = _playerRepository.GetById(id);
+                PlayerResponseDto response = _mapper.Map<PlayerResponseDto>(player);
+                return new ReturnModel<PlayerResponseDto>()
+                {
+                    Data = response,
+                    Message = "Id ye ait oyuncu getirildi.",
+                    StatusCode = System.Net.HttpStatusCode.OK
+                };
+            }
+            catch (NotFoundException ex)
+            {
+                return new ReturnModel<PlayerResponseDto>()
+                {
+                    Message = ex.Message,
+                    StatusCode = System.Net.HttpStatusCode.NotFound
+                };
+
+            }
 
         }
-
-    }
 
     public ReturnModel<List<PlayerResponseDto>> GetList()
     {
-        throw new NotImplementedException();
+      var list = _playerRepository.GetAll();
+        List<PlayerResponseDto> response = _mapper.Map<List<PlayerResponseDto>>(list);
+
+        return new ReturnModel<List<PlayerResponseDto>>()
+        {
+            Data = response,
+            Message = "Oyuncular listelendi",
+            StatusCode = System.Net.HttpStatusCode.OK
+        };
     }
 
     public ReturnModel<PlayerResponseDto> Update(UpdatePlayerRequestDto requestDto)
     {
         throw new NotImplementedException();
     }
-}
+} 
+
+
