@@ -1,4 +1,7 @@
 using Day6_efcore1.Context;
+using Day6_efcore1.Repositories.Abstract;
+using Day6_efcore1.Repositories.Concrete;
+using Day6_efcore1.Services.Concrete;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +16,16 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddDbContext<BaseDbContext>();
+// Dependency Injection LifeCycle
+// AddSingleton -> Uygulama boyunca bellekte tek 1 tane instance tutar
+// AddScopped -> Request response arasýnda yaþam süresinde olan bir nesnenin instance 'sini tutar.
+// AddTransiesnt -> Nesne ne zaman injection ile çaðýrýlýyorsa her çaðrýldýðý yer içiçn bir nesne bellekte tutar.
+builder.Services.AddScoped<IPlayerRepository,PlayerRepository>();
+builder.Services.AddScoped<PlayerService>();
+
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
