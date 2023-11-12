@@ -1,10 +1,8 @@
-﻿using AutoMapper;
-using Day6_efcore1.Context;
+﻿
 using Day6_efcore1.Dtos.Reuqests;
-using Day6_efcore1.Models;
 using Day6_efcore1.Services.Concrete;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+
 
 namespace Day6_efcore1.Controllers;
 
