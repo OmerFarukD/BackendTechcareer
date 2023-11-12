@@ -9,12 +9,7 @@ public class BaseDbContext : DbContext
 {
     public BaseDbContext(DbContextOptions options): base(options)
     {
-     
-    }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.UseSqlServer("server =(localdb)\\MSSQLLocalDB; Database= Sports_Db; Trusted_Connection=true");
+        Database.EnsureCreated();
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

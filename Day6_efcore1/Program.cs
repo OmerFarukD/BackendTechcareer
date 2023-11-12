@@ -2,6 +2,7 @@ using Day6_efcore1.Context;
 using Day6_efcore1.Repositories.Abstract;
 using Day6_efcore1.Repositories.Concrete;
 using Day6_efcore1.Services.Concrete;
+using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,7 +16,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
-builder.Services.AddDbContext<BaseDbContext>();
+builder.Services.AddDbContext<BaseDbContext>(opt =>
+{
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"));
+});
 // Dependency Injection LifeCycle
 // AddSingleton -> Uygulama boyunca bellekte tek 1 tane instance tutar
 // AddScopped -> Request response arasýnda yaþam süresinde olan bir nesnenin instance 'sini tutar.
